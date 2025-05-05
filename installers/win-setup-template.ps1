@@ -121,10 +121,13 @@ Copy-Item -Path ./$PythonExecName -Destination $PythonArchPath | Out-Null
 Write-Host "Install Python $Version in $PythonToolcachePath..."
 $ExecParams = Get-ExecParams -IsMSI $IsMSI -IsFreeThreaded $IsFreeThreaded -PythonArchPath $PythonArchPath
 
+Write-Host "Debug: Starting Python installation for $Version ($Architecture)"
+
 cmd.exe /c "cd $PythonArchPath && call $PythonExecName $ExecParams /quiet"
 if ($LASTEXITCODE -ne 0) {
     Throw "Error happened during Python installation"
 }
+Write-Host "Debug: Python installation completed for $Version ($Architecture)"
 
 # print out all files in $PythonArchPath
 Write-Host "Files in $PythonArchPath"
