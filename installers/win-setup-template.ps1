@@ -118,8 +118,11 @@ New-Item -ItemType Directory -Path $PythonArchPath -Force | Out-Null
 Write-Host "Copy Python binaries to $PythonArchPath"
 Copy-Item -Path ./$PythonExecName -Destination $PythonArchPath | Out-Null
 
+Write-Host "Debug: Starting Python installation for $Version ($Architecture)"
+
 Write-Host "Install Python $Version in $PythonToolcachePath..."
 $ExecParams = Get-ExecParams -IsMSI $IsMSI -IsFreeThreaded $IsFreeThreaded -PythonArchPath $PythonArchPath
+
 
 Write-Host "Debug: Starting Python installation for $Version ($Architecture)"
 
