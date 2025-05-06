@@ -135,7 +135,15 @@ Write-Host "Debug: Python installation completed for $Version ($Architecture)"
 # print out all files in $PythonArchPath
 Write-Host "Files in $PythonArchPath"
 $files = Get-ChildItem -Path $PythonArchPath -File -Recurse
-Write-Output $files
+# Write-Output $files
+# Log the number of files
+if ($files -eq $null) {
+    Write-Host "No files found in $PythonArchPath"
+} else {
+    $fileCount = $files.Count
+    Write-Host "Number of files in $PythonArchPath: $fileCount"
+    Write-Output $files
+}
 
 if ($IsFreeThreaded) {
     # Delete python.exe and create a symlink to free-threaded exe
