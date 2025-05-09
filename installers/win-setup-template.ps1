@@ -118,32 +118,17 @@ New-Item -ItemType Directory -Path $PythonArchPath -Force | Out-Null
 Write-Host "Copy Python binaries to $PythonArchPath"
 Copy-Item -Path ./$PythonExecName -Destination $PythonArchPath | Out-Null
 
-Write-Host "Debug: Starting Python installation for $Version ($Architecture)"
 
 Write-Host "Install Python $Version in $PythonToolcachePath..."
 $ExecParams = Get-ExecParams -IsMSI $IsMSI -IsFreeThreaded $IsFreeThreaded -PythonArchPath $PythonArchPath
 
 
-Write-Host "Debug: Starting Python installation for $Version ($Architecture)"
 
 cmd.exe /c "cd $PythonArchPath && call $PythonExecName $ExecParams /quiet"
 if ($LASTEXITCODE -ne 0) {
     Throw "Error happened during Python installation"
 }
-Write-Host "Debug: Python installation completed for $Version ($Architecture)"
 
-# print out all files in $PythonArchPath
-# Write-Host "Files in $PythonArchPath"
-# $files = Get-ChildItem -Path $PythonArchPath -File -Recurse
-# Write-Output $files
-# Log the number of files
-if ($files -eq $null) {
-    Write-Host "No files found in $PythonArchPath"
-} else {
-    $fileCount = $files.Count
-    Write-Host "Number of files in $PythonArchPath: $fileCount"
-    Write-Output $files
-}
 
 if ($IsFreeThreaded) {
     # Delete python.exe and create a symlink to free-threaded exe
