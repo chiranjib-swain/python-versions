@@ -133,8 +133,8 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "Debug: Python installation completed for $Version ($Architecture)"
 
 # print out all files in $PythonArchPath
-Write-Host "Files in $PythonArchPath"
-$files = Get-ChildItem -Path $PythonArchPath -File -Recurse
+# Write-Host "Files in $PythonArchPath"
+# $files = Get-ChildItem -Path $PythonArchPath -File -Recurse
 # Write-Output $files
 # Log the number of files
 if ($files -eq $null) {
